@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design</title>
+    
+    <style>
+        *{
+          
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+            list-style: none;
+            box-sizing: border-box;
+        }
+        nav{
+            background-color: green;
+            height: 80px;
+            width: 100%;
+            font-weight: bold;
+        }
+        label.logo{
+            color: white;
+            font-size: 35px;
+            line-height: 80px;
+            padding: 0 100px;
+        }
+        nav ul{
+            float:right;
+            margin-right: 20px;
+        }
+        nav ul li{
+            display: inline-block;
+            line-height: 80px;
+            margin: 0 5px;
+        }
+        nav ul li a{
+            color: white;
+            font-size: 17px;
+            padding: 7px 13px;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+        a.active,a:hover{
+            background-color: rgba(151, 244, 12, 0.548);
+            transition: .5s;
+        }
+        checkbtn{
+            color: white;
+            float: right;
+            margin-right: 40px;
+            cursor: pointer;
+            display: none;
+        }
+        #check{
+            display: none;
+        }
+        section{
+            background-image: url("food.jpg");
+            background-size: cover;
+            height: calc(100vh);
+        }
+        h1{
+            color: white;
+            font-size: 80px;
+            text-align: center;
+            padding: 200px;
+        }
+
+        section ul li{
+            display: inline-block;
+        }
+        section ul li a{
+            color: white;
+            font-size: 50px;
+            padding: 15px;
+            background-color: aqua;
+            border-radius:50px ;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <label class="logo">Zero Hungry</label>
+        <ul>
+            <li><a class="active" href="#" onclick="loadPage('home.html')">Home</a></li>
+            <li><a href="#" onclick="loadPage('contributor.html')">Contributor</a></li>
+            <li><a href="#" onclick="loadPage('Distributor.html')">Distributor</a></li>
+            <li><a href="#" onclick="loadPage('signup.html')">Sign Up</a></li>
+            <li><a href="#" onclick="loadPage('login.html')">Log in</a></li>
+        </ul>
+    </nav>
+    <section>
+        <iframe id="iframeContent"></iframe>
+    </section>
+
+    <script>
+        function loadPage(page) {
+            document.getElementById('iframeContent').src = page;
+        }
+    </script>
+</body>
+</html>
+
+

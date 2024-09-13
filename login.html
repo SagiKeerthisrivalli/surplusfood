@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(#8debff,#6cacff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background: linear-gradient(rgb(149, 241, 198), rgb(93, 93, 174));
+            padding: 20px;
+            border-radius: 25px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            height: 300px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            border-radius: 25px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 15px 105px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 15px;
+            font-size: 20px;
+            border-radius: 25px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 30px;
+            margin-top: 40px;
+            padding: 10px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <form id="loginForm">
+        <h2>Login</h2>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="button" id="checkCredential">Login</button>
+        <div class="message" id="message"></div>
+    </form>
+
+    <script type="module">
+        // Import Firebase scripts
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyApcNvsWEM7sScjOwEgf6DlzRF9QiWm0NE",
+            authDomain: "foodapp-7bde8.firebaseapp.com",
+            projectId: "foodapp-7bde8",
+            storageBucket: "foodapp-7bde8.appspot.com",
+            messagingSenderId: "31667505473",
+            appId: "1:31667505473:web:4bd258f211d80ffb1af9c0",
+            measurementId: "G-46SFP4RE3H"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Handle login
+        document.getElementById("checkCredential").addEventListener("click", () => {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const messageDiv = document.getElementById("message");
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    console.log('User signed in:', user);
+                    messageDiv.textContent = 'Login successful!';
+                    messageDiv.style.color = 'black';
+                    setTimeout(function() {
+                      document.body.innerHTML = "Redirecting to home page...";
+                      setTimeout(function() {
+                        window.location.href = "home.html";
+                      }, 2000);
+                    }, 4000);
+                    // Redirect or show logged in state
+                    //window.location.href = "home.html"; // Uncomment to redirect
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.error('Error signing in:', errorCode, errorMessage);
+                    messageDiv.textContent = `Error: ${errorMessage}`;
+                    messageDiv.style.color = 'red';
+                });
+        });
+    </script>
+</body>
+</html>
